@@ -248,7 +248,6 @@
   }
   .strength-card:focus-visible{ outline: 2px solid var(--rose-light); outline-offset: 3px; }
   
-  /* 화살표 추가 및 정렬을 위한 CSS 수정 */
   .strength-card h3{
     font-family: var(--serif);
     font-size: 1.15rem;
@@ -257,7 +256,6 @@
     justify-content: space-between;
     align-items: center;
   }
-  /* 화살표 아이콘 모양 만들기 */
   .strength-card h3::after {
     content: '';
     display: inline-block;
@@ -267,9 +265,8 @@
     border-bottom: 2px solid var(--rose-light);
     transform: rotate(45deg);
     transition: transform 0.3s ease;
-    margin-bottom: 4px; /* 시각적 중앙 정렬을 위한 미세 조정 */
+    margin-bottom: 4px;
   }
-  /* 카드가 열렸을 때 화살표 뒤집기 */
   .strength-card[aria-expanded="true"] h3::after {
     transform: rotate(-135deg) translate(-2px, -2px);
   }
@@ -290,27 +287,29 @@
   }
   .strength-detail dd{ margin: 4px 0 0; color: var(--ink-muted); font-size: 0.92rem; }
 
+  /* ---------- PREFERENCES (취향 동그라미 수정 부분) ---------- */
   .pref-circles{
-    display:flex;
-    gap: 28px;
+    display: flex;
+    gap: 32px;
     margin-bottom: 40px;
     flex-wrap: wrap;
+    justify-content: center; /* 👈 가운데 정렬 추가 */
   }
   .pref-circle{
-    width: 128px;
-    height: 128px;
+    width: 148px;  /* 👈 크기 확대 (기존 128px) */
+    height: 148px; /* 👈 크기 확대 (기존 128px) */
     border-radius: 50%;
     background: var(--bg-card);
     border: 1px solid var(--line);
     color: var(--ink-muted);
     font-family: var(--serif);
-    font-size: 1.02rem;
+    font-size: 1.12rem; /* 👈 글자 크기 살짝 확대 */
     font-weight: 600;
     cursor: pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     transition: background .25s ease, color .25s ease, border-color .25s ease, transform .2s ease;
   }
   .pref-circle:hover{ transform: translateY(-2px); }
@@ -322,6 +321,7 @@
   }
   .pref-panel{
     max-width: 640px;
+    margin: 0 auto; /* 👈 패널도 가운데 정렬되도록 추가 */
     min-height: 84px;
     padding: 28px 30px;
     background: var(--bg-card);
@@ -355,7 +355,7 @@
   @media (max-width: 860px){
     .wrap{ padding: 0 22px; }
     .strengths{ grid-template-columns: 1fr; }
-    .pref-circle{ width: 104px; height: 104px; font-size: 0.92rem; }
+    .pref-circle{ width: 120px; height: 120px; font-size: 1rem; } /* 모바일에서는 살짝 조절 */
     header.hero{ padding: 90px 0 70px; }
   }
 
@@ -434,7 +434,6 @@
         </div>
       </div>
 
-      <!-- 내용이 업데이트된 3번째 단계 -->
       <div class="stage" data-stage>
         <div class="stage-marker">
           3
