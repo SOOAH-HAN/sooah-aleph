@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>한수아 — SOO AH'S STORY</title>
+<title>한수아 — SOO AH'S JOURNEY</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700;900&family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -54,9 +54,9 @@
     align-items:center;
     justify-content:space-between;
     gap: 16px;
-    min-height: 72px;
+    min-height: 48px;
     flex-wrap: wrap;
-    padding: 12px 40px;
+    padding: 6px 40px;
   }
   .brand{
     font-family: var(--serif);
@@ -112,7 +112,7 @@
 
   /* ---------- HERO ---------- */
   header.hero{
-    padding: 120px 0 100px;
+    padding: 32px 0 16px;
     position: relative;
     overflow: hidden;
   }
@@ -140,12 +140,12 @@
     font-size: 0.88rem;
     color: var(--ink-faint);
     font-style: italic;
-    margin: 0 0 14px;
+    margin: 0 0 8px;
   }
   .hero-headline{
     font-family: var(--serif);
     font-weight: 700;
-    font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+    font-size: clamp(1.9rem, 4vw, 3.1rem);
     line-height: 1.32;
     max-width: 760px;
     margin: 0 0 28px;
@@ -209,8 +209,8 @@
   }
 
   /* ---------- SECTION HEADS ---------- */
-  .section{ padding: 96px 0; border-top: 1px solid var(--line); }
-  .section-head{ max-width: 620px; margin-bottom: 56px; }
+  .section{ padding: 32px 0; border-top: 1px solid var(--line); }
+  .section-head{ max-width: 620px; margin-bottom: 10px; }
   .section-head h2{
     font-family: var(--serif);
     font-size: clamp(1.6rem, 2.6vw, 2.2rem);
@@ -219,58 +219,92 @@
   }
   .section-head p{ color: var(--ink-muted); margin:0; font-size: 1rem; }
 
-  /* ---------- JOURNEY ---------- */
-  .journey{ position: relative; }
-  .journey-track{
-    position:absolute;
-    left: 27px;
-    top: 10px;
-    bottom: 10px;
-    width: 2px;
-    background: linear-gradient(var(--line), var(--line)) ;
+  /* ---------- JOURNEY BOARD ---------- */
+  .journey-board{
+    max-width: 640px;
+    margin-bottom: 8px;
   }
-  .stage{
+  .board-row{
     display:grid;
-    grid-template-columns: 56px 1fr;
-    gap: 28px;
-    margin-bottom: 56px;
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity .6s ease, transform .6s ease;
-  }
-  .stage.in-view{ opacity: 1; transform: translateY(0); }
-  .stage-marker{
+    grid-template-columns: repeat(3, 1fr);
+    align-items:center;
+    justify-items:center;
     position:relative;
-    width: 56px; height: 56px;
-    border-radius: 50%;
+    height: 82px;
+  }
+  .board-row::before{
+    content:'';
+    position:absolute;
+    top:50%;
+    left: 16.666%;
+    right: 16.666%;
+    height: 2px;
+    background: var(--line);
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+  .board-row.row-bottom::before{
+    right: 50%;
+  }
+  .connector-row{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items:center;
+    height: 8px;
+  }
+  .connector-row .v-line{
+    width: 2px;
+    height: 100%;
+    background: var(--line);
+  }
+  .board-node{
+    position:relative;
+    z-index: 2;
+    width: 108px;
+    padding: 10px 8px;
+    border-radius: 18px;
     background: var(--bg-card);
     border: 1px solid var(--line);
-    display:flex; align-items:center; justify-content:center;
-    font-family: var(--serif);
-    font-weight: 700;
     color: var(--ink-muted);
-    z-index: 2;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap: 6px;
+    cursor:pointer;
+    transition: background .25s ease, color .25s ease, border-color .25s ease, transform .2s ease;
   }
-  .stage.in-view .stage-marker{
+  .board-node:hover{ transform: translateY(-2px); }
+  .board-node:focus-visible{ outline: 2px solid var(--rose-light); outline-offset: 4px; }
+  .board-node .node-title{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-align:center;
+    line-height: 1.25;
+  }
+  .board-node.is-active{
     background: var(--rose-deep);
     color: var(--ink);
     border-color: var(--rose-light);
   }
-  .stage-mascot{
-    position:absolute;
-    top: -46px; left: 50%;
-    transform: translateX(-50%) scale(0.4);
-    opacity: 0;
-    transition: opacity .5s ease .15s, transform .5s cubic-bezier(.34,1.56,.64,1) .15s;
+  .board-spacer{ width:108px; }
+
+  .journey-detail{
+    margin-top: 12px;
+    padding: 14px 18px;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    max-width: 640px;
   }
-  .stage.in-view .stage-mascot{ opacity: 1; transform: translateX(-50%) scale(1); }
-  .stage-body h3{
+  .journey-detail h3{
     font-family: var(--serif);
-    font-size: 1.25rem;
-    margin: 6px 0 10px;
+    font-size: 1.2rem;
+    margin: 0 0 10px;
     font-weight: 600;
   }
-  .stage-body p{ margin:0; color: var(--ink-muted); max-width: 640px; }
+  .journey-detail p{ margin:0; color: var(--ink-muted); }
 
   /* ---------- STRENGTHS ---------- */
   .strengths{
@@ -311,7 +345,7 @@
   }
   .strength-detail dd{ margin: 4px 0 0; color: var(--ink-muted); font-size: 0.92rem; }
   .strength-evidence{
-    margin-top: 18px;
+    margin-top: 10px;
     border-radius: 14px;
     overflow: hidden;
     border: 1px solid var(--line);
@@ -319,7 +353,8 @@
   .strength-evidence img{
     display:block;
     width: 100%;
-    height: auto;
+    max-height: 200px;
+    object-fit: cover;
   }
   .strength-evidence figcaption{
     padding: 10px 14px;
@@ -408,15 +443,14 @@
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
-  .reduced-motion .stage{ opacity:1; transform:none; }
-  .reduced-motion .stage-mascot{ opacity:1; transform: translateX(-50%) scale(1); }
+  .reduced-motion .journey-detail{ transition: none; }
 </style>
 </head>
 <body>
 
 <nav>
   <div class="wrap">
-    <div class="brand">한수아 <span>· SOO AH'S STORY</span></div>
+    <div class="brand">한수아 <span>· SOO AH'S JOURNEY</span></div>
     <div class="nav-links">
       <a href="#journey" class="link-quiet">제가 걸어온 길</a>
       <a href="#strengths" class="link-quiet">강점</a>
@@ -452,100 +486,78 @@
   <div class="wrap">
     <div class="section-head">
       <h2>제가 걸어온 길</h2>
+      <p>번호를 눌러보세요.</p>
     </div>
 
-    <div class="journey">
-      <div class="journey-track" aria-hidden="true"></div>
-
-      <div class="stage" data-stage>
-        <div class="stage-marker">
-          1
-          <svg class="stage-mascot" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
-            <circle cx="20" cy="20" r="19" fill="#2c1a1e" stroke="#eec3bd" stroke-width="1"/>
-            <line x1="20" y1="9" x2="20" y2="27" stroke="#eec3bd" stroke-width="1.6" stroke-linecap="round"/>
-            <line x1="10" y1="13" x2="30" y2="13" stroke="#eec3bd" stroke-width="1.6" stroke-linecap="round"/>
-            <path d="M10 13 L6 20 A4 4 0 0 0 14 20 Z" fill="none" stroke="#eec3bd" stroke-width="1.4" stroke-linejoin="round"/>
-            <path d="M30 13 L26 20 A4 4 0 0 0 34 20 Z" fill="none" stroke="#eec3bd" stroke-width="1.4" stroke-linejoin="round"/>
-            <line x1="14" y1="30" x2="26" y2="30" stroke="#eec3bd" stroke-width="1.6" stroke-linecap="round"/>
+    <div class="journey-board" role="tablist" aria-label="제가 걸어온 길 5단계">
+      <div class="board-row">
+        <button class="board-node" data-journey="1" role="tab" aria-selected="false" aria-controls="journey-detail">
+          <svg viewBox="0 0 40 40" width="22" height="22" aria-hidden="true">
+            <line x1="20" y1="9" x2="20" y2="27" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="10" y1="13" x2="30" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M10 13 L6 20 A4 4 0 0 0 14 20 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M30 13 L26 20 A4 4 0 0 0 34 20 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <line x1="14" y1="30" x2="26" y2="30" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
           </svg>
-        </div>
-        <div class="stage-body">
-          <h3>법학전공</h3>
-          <p>가족과 주변 사람들이 법률 지식이 부족해 불이익을 받지 않도록 돕고 싶어 법학을 전공했습니다. 실제 사례를 통해 기본 개념과 실생활에 쓰이는 법률 지식을 익혔습니다.</p>
-        </div>
+          <span class="node-title">법학전공</span>
+        </button>
+        <button class="board-node" data-journey="2" role="tab" aria-selected="false" aria-controls="journey-detail">
+          <svg viewBox="0 0 40 40" width="22" height="22" aria-hidden="true">
+            <rect x="12" y="9" width="16" height="22" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <rect x="14.5" y="12" width="11" height="4" rx="1" fill="currentColor"/>
+            <circle cx="15.5" cy="20.5" r="1.3" fill="currentColor"/>
+            <circle cx="20" cy="20.5" r="1.3" fill="currentColor"/>
+            <circle cx="24.5" cy="20.5" r="1.3" fill="currentColor"/>
+            <circle cx="15.5" cy="25" r="1.3" fill="currentColor"/>
+            <circle cx="20" cy="25" r="1.3" fill="currentColor"/>
+            <circle cx="24.5" cy="25" r="1.3" fill="currentColor"/>
+          </svg>
+          <span class="node-title">전산회계 1급</span>
+        </button>
+        <button class="board-node is-active" data-journey="3" role="tab" aria-selected="true" aria-controls="journey-detail">
+          <svg viewBox="0 0 40 40" width="22" height="22" aria-hidden="true">
+            <rect x="13" y="8" width="14" height="24" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <line x1="16" y1="12" x2="16" y2="28" stroke="currentColor" stroke-width="1" opacity="0.7"/>
+            <line x1="20" y1="12" x2="20" y2="28" stroke="currentColor" stroke-width="1" opacity="0.7"/>
+            <line x1="24" y1="12" x2="24" y2="28" stroke="currentColor" stroke-width="1" opacity="0.7"/>
+            <rect x="18" y="24" width="4" height="8" fill="currentColor"/>
+          </svg>
+          <span class="node-title">안내데스크</span>
+        </button>
       </div>
 
-      <div class="stage" data-stage>
-        <div class="stage-marker">
-          2
-          <svg class="stage-mascot" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
-            <circle cx="20" cy="20" r="19" fill="#2c1a1e" stroke="#eec3bd" stroke-width="1"/>
-            <rect x="12" y="9" width="16" height="22" rx="2.5" fill="none" stroke="#eec3bd" stroke-width="1.5"/>
-            <rect x="14.5" y="12" width="11" height="4" rx="1" fill="#eec3bd"/>
-            <circle cx="15.5" cy="20.5" r="1.3" fill="#eec3bd"/>
-            <circle cx="20" cy="20.5" r="1.3" fill="#eec3bd"/>
-            <circle cx="24.5" cy="20.5" r="1.3" fill="#eec3bd"/>
-            <circle cx="15.5" cy="25" r="1.3" fill="#eec3bd"/>
-            <circle cx="20" cy="25" r="1.3" fill="#eec3bd"/>
-            <circle cx="24.5" cy="25" r="1.3" fill="#eec3bd"/>
-          </svg>
-        </div>
-        <div class="stage-body">
-          <h3>전산회계 1급 취득</h3>
-          <p>취업을 준비하며 다양한 직무에 활용할 수 있는 실무 역량을 갖추고자 전산회계 1급 자격증을 취득했습니다.</p>
-        </div>
+      <div class="connector-row" aria-hidden="true">
+        <span class="v-line"></span><span class="v-line"></span><span></span>
       </div>
 
-      <div class="stage" data-stage>
-        <div class="stage-marker">
-          3
-          <svg class="stage-mascot" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
-            <circle cx="20" cy="20" r="19" fill="#2c1a1e" stroke="#eec3bd" stroke-width="1"/>
-            <rect x="13" y="8" width="14" height="24" rx="1.5" fill="none" stroke="#eec3bd" stroke-width="1.5"/>
-            <line x1="16" y1="12" x2="16" y2="28" stroke="#eec3bd" stroke-width="1" opacity="0.6"/>
-            <line x1="20" y1="12" x2="20" y2="28" stroke="#eec3bd" stroke-width="1" opacity="0.6"/>
-            <line x1="24" y1="12" x2="24" y2="28" stroke="#eec3bd" stroke-width="1" opacity="0.6"/>
-            <rect x="18" y="24" width="4" height="8" fill="#eec3bd"/>
+      <div class="board-row row-bottom">
+        <button class="board-node" data-journey="4" role="tab" aria-selected="false" aria-controls="journey-detail">
+          <svg viewBox="0 0 40 40" width="22" height="22" aria-hidden="true">
+            <line x1="14" y1="10" x2="14" y2="31" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <rect x="14" y="10" width="14" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="14" y="18" width="11" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/>
           </svg>
-        </div>
-        <div class="stage-body">
-          <h3>SKT 안내데스크 2년 근무</h3>
-          <p>회계 학원 바로 옆에 있던 SKT 사옥을 보며 늘 궁금했고, 언젠가 저 안에서 일해보고 싶다는 마음이 생겼습니다. 그 마음으로 지원해 방문객 안내와 민원 응대, 입·출입 관리 및 카드키 발급 등의 업무를 약 2년간 담당하며 다양한 방문객을 응대하는 경험을 쌓았습니다.</p>
-        </div>
-      </div>
-
-      <div class="stage" data-stage>
-        <div class="stage-marker">
-          4
-          <svg class="stage-mascot" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
-            <circle cx="20" cy="20" r="19" fill="#2c1a1e" stroke="#eec3bd" stroke-width="1"/>
-            <line x1="14" y1="10" x2="14" y2="31" stroke="#eec3bd" stroke-width="1.6" stroke-linecap="round"/>
-            <rect x="14" y="10" width="14" height="6" rx="1" fill="none" stroke="#eec3bd" stroke-width="1.4"/>
-            <rect x="14" y="18" width="11" height="6" rx="1" fill="none" stroke="#eec3bd" stroke-width="1.4"/>
+          <span class="node-title">인프라 궁금증</span>
+        </button>
+        <button class="board-node" data-journey="5" role="tab" aria-selected="false" aria-controls="journey-detail">
+          <svg viewBox="0 0 40 40" width="22" height="22" aria-hidden="true">
+            <rect x="13" y="11" width="14" height="10" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M10 25 L30 25 L27.5 29 L12.5 29 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M18 18 L20.5 13 L23 18 Z" fill="currentColor"/>
           </svg>
-        </div>
-        <div class="stage-body">
-          <h3>인프라에 대한 궁금증</h3>
-          <p>층별 안내도와 방문객 응대를 통해 '인프라'라는 부서를 접하게 되었습니다. 보안구역인 장비실을 출입하는 코어팀을 보며 인프라 업무에 대한 궁금증이 생겼습니다.</p>
-        </div>
+          <span class="node-title">ALEPH</span>
+        </button>
+        <span class="board-spacer" aria-hidden="true"></span>
       </div>
+    </div>
 
-      <div class="stage" data-stage>
-        <div class="stage-marker">
-          5
-          <svg class="stage-mascot" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
-            <circle cx="20" cy="20" r="19" fill="#2c1a1e" stroke="#eec3bd" stroke-width="1"/>
-            <rect x="13" y="11" width="14" height="10" rx="1.2" fill="none" stroke="#eec3bd" stroke-width="1.5"/>
-            <path d="M10 25 L30 25 L27.5 29 L12.5 29 Z" fill="none" stroke="#eec3bd" stroke-width="1.4" stroke-linejoin="round"/>
-            <path d="M18 18 L20.5 13 L23 18 Z" fill="#eec3bd"/>
-          </svg>
-        </div>
-        <div class="stage-body">
-          <h3>ALEPH에서 새로운 분야를 배우다</h3>
-          <p>비전공자로서 새로운 분야에 대한 걱정도 있었지만, 직접 경험해보자는 생각으로 ALEPH에 지원했고 지금 이 분야를 배우고 있습니다.</p>
-        </div>
-      </div>
-
+    <div class="journey-detail" id="journey-detail" role="tabpanel">
+      <h3 id="journey-detail-title">SKT 안내데스크 2년 근무</h3>
+      <p id="journey-detail-desc">회계 학원 바로 옆에 있던 SKT 사옥을 보며 늘 궁금했고, 언젠가 저 안에서 일해보고 싶다는 마음이 생겼습니다. 그 마음으로 지원해 방문객 안내와 민원 응대, 입·출입 관리 및 카드키 발급 등의 업무를 약 2년간 담당하며 다양한 방문객을 응대하는 경험을 쌓았습니다.</p>
+      <figure class="strength-evidence" id="journey-detail-evidence">
+        <img id="journey-detail-img" src="evidence-desk.jpg" alt="SKT 안내데스크 근무 당시">
+        <figcaption id="journey-detail-caption">SKT 안내데스크 근무 당시</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -690,13 +702,41 @@
     document.body.classList.toggle('reduced-motion', motionSwitch.checked);
   });
 
-  const stages = document.querySelectorAll('[data-stage]');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('in-view');
+  const journeyData = {
+    1: { title: '법학전공', desc: '가족과 주변 사람들이 법률 지식이 부족해 불이익을 받지 않도록 돕고 싶어 법학을 전공했습니다. 실제 사례를 통해 기본 개념과 실생활에 쓰이는 법률 지식을 익혔습니다.' },
+    2: { title: '전산회계 1급 취득', desc: '취업을 준비하며 다양한 직무에 활용할 수 있는 실무 역량을 갖추고자 전산회계 1급 자격증을 취득했습니다.' },
+    3: { title: 'SKT 안내데스크 2년 근무', desc: '회계 학원 바로 옆에 있던 SKT 사옥을 보며 늘 궁금했고, 언젠가 저 안에서 일해보고 싶다는 마음이 생겼습니다. 그 마음으로 지원해 방문객 안내와 민원 응대, 입·출입 관리 및 카드키 발급 등의 업무를 약 2년간 담당하며 다양한 방문객을 응대하는 경험을 쌓았습니다.',
+         img: 'evidence-desk.jpg', caption: 'SKT 안내데스크 근무 당시' },
+    4: { title: '인프라에 대한 궁금증', desc: "층별 안내도와 방문객 응대를 통해 '인프라'라는 부서를 접하게 되었습니다. 보안구역인 장비실을 출입하는 코어팀을 보며 인프라 업무에 대한 궁금증이 생겼습니다." },
+    5: { title: 'ALEPH에서 새로운 분야를 배우다', desc: '비전공자로서 새로운 분야에 대한 걱정도 있었지만, 직접 경험해보자는 생각으로 ALEPH에 지원했고 지금 이 분야를 배우고 있습니다.' }
+  };
+  const journeyNodes = document.querySelectorAll('.board-node');
+  const jTitle = document.getElementById('journey-detail-title');
+  const jDesc = document.getElementById('journey-detail-desc');
+  const jFigure = document.getElementById('journey-detail-evidence');
+  const jImg = document.getElementById('journey-detail-img');
+  const jCaption = document.getElementById('journey-detail-caption');
+
+  journeyNodes.forEach(node => {
+    node.addEventListener('click', () => {
+      const key = node.dataset.journey;
+      const data = journeyData[key];
+      journeyNodes.forEach(n => {
+        n.classList.toggle('is-active', n === node);
+        n.setAttribute('aria-selected', String(n === node));
+      });
+      jTitle.textContent = data.title;
+      jDesc.textContent = data.desc;
+      if (data.img) {
+        jImg.src = data.img;
+        jImg.alt = data.caption;
+        jCaption.textContent = data.caption;
+        jFigure.hidden = false;
+      } else {
+        jFigure.hidden = true;
+      }
     });
-  }, { threshold: 0.35 });
-  stages.forEach(s => io.observe(s));
+  });
 
   document.querySelectorAll('[data-toggle]').forEach(btn => {
     btn.addEventListener('click', () => {
